@@ -38,5 +38,8 @@ public class CustomerServiceImplWithSpringData implements CustomerService {
         customerRepository.delete(id);
     }
 
-
+    @Override
+    public Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable) {
+        return customerRepository.findAllByFirstNameContaining(firstname, pageable);
+    }
 }
