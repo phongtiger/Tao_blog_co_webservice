@@ -1,7 +1,7 @@
 package com.codegym.cms.formatter;
 
-import com.codegym.cms.model.Province;
-import com.codegym.cms.service.ProvinceService;
+import com.codegym.cms.model.Category;
+import com.codegym.cms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
@@ -10,21 +10,21 @@ import java.text.ParseException;
 import java.util.Locale;
 
 @Component
-public class ProvinceFormatter implements Formatter<Province> {
+public class ProvinceFormatter implements Formatter<Category> {
 
-    private ProvinceService provinceService;
+    private CategoryService categoryService;
 
     @Autowired
-    public ProvinceFormatter(ProvinceService provinceService) {
-        this.provinceService = provinceService;}
+    public ProvinceFormatter(CategoryService categoryService) {
+        this.categoryService = categoryService;}
 
     @Override
-    public Province parse(String text, Locale locale) throws ParseException {
-        return provinceService.findById(Long.parseLong(text));
+    public Category parse(String text, Locale locale) throws ParseException {
+        return categoryService.findById(Long.parseLong(text));
     }
 
     @Override
-    public String print(Province object, Locale locale) {
+    public String print(Category object, Locale locale) {
         return "[" + object.getId() + ", " +object.getName() + "]";
     }
 }

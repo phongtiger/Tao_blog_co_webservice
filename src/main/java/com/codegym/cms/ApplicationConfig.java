@@ -1,10 +1,10 @@
 package com.codegym.cms;
 
 import com.codegym.cms.formatter.ProvinceFormatter;
-import com.codegym.cms.service.CustomerService;
-import com.codegym.cms.service.ProvinceService;
-import com.codegym.cms.service.impl.CustomerServiceImplWithSpringData;
-import com.codegym.cms.service.impl.ProvinceServiceImplWithSpringDate;
+import com.codegym.cms.service.BlogService;
+import com.codegym.cms.service.CategoryService;
+import com.codegym.cms.service.impl.BlogServiceImplWithSpringData;
+import com.codegym.cms.service.impl.CategoryServiceImplWithSpringDate;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -47,7 +47,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addFormatter(new ProvinceFormatter(applicationContext.getBean(ProvinceService.class)));
+        registry.addFormatter(new ProvinceFormatter(applicationContext.getBean(CategoryService.class)));
     }
 
     @Override
@@ -56,11 +56,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     }
 
     @Bean
-    public CustomerService customerService(){
-        return new CustomerServiceImplWithSpringData();
+    public BlogService customerService(){
+        return new BlogServiceImplWithSpringData();
     }
     @Bean
-    public ProvinceService provinceService() {return  new ProvinceServiceImplWithSpringDate();}
+    public CategoryService provinceService() {return  new CategoryServiceImplWithSpringDate();}
 
 
     //Thymeleaf Configuration
