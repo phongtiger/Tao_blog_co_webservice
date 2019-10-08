@@ -108,6 +108,4 @@ public class BlogController {
         blogService.remove(blog.getId());
         return "redirect:blogs";
     }
-
-
 }
