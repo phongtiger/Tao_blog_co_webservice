@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>View category: <span th:text="${category.name}"></span></h1>
-<a href="/provinces">Province list</a>
+<a href="/categories">Province list</a>
 <table border="1">
     <tr>
         <th>First name</th>
@@ -14,8 +14,8 @@
     </tr>
     <th:block th:each="blog : ${blogs}">
         <tr>
-            <td th:text="${blog.firstName}"></td>
-            <td th:text="${blog.lastName}"></td>
+            <td th:text="${blog.tittle}"></td>
+            <td th:text="${blog.content}"></td>
         </tr>
     </th:block>
 </table>

@@ -7,7 +7,7 @@
 <body>
 <h1>Edit blog</h1>
 <p>
-    <a href="/blogs">Customer list</a>
+    <a href="/blogs">Blog list</a>
 </p>
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
@@ -16,23 +16,12 @@
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
         <tr>
-            <td>First name:</td>
-            <td><input type="text" th:field="*{firstName}"/></td>
+            <td>Title:</td>
+            <td><input type="text" th:field="*{tittle}"/></td>
         </tr>
         <tr>
-            <td>Last name:</td>
-            <td><input type="text" th:field="*{lastName}"/></td>
-        </tr>
-        <tr>
-            <td>Province:</td>
-            <td>
-                <select name="category">
-                    <option th:each="p : ${provinces}"
-                            th:value="${p.id}"
-                            th:text="${p.name}"
-                            th:selected="(${p.id} == *{category.id})"></option>
-                </select>
-            </td>
+            <td>Content: </td>
+            <td><textarea type="text" th:field="*{content}"></textarea></td>
         </tr>
         <tr>
             <td></td>

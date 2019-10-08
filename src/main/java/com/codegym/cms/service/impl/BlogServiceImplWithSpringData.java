@@ -17,7 +17,7 @@ public class BlogServiceImplWithSpringData implements BlogService {
     }
 
     @Override
-    public Iterable<Blog> findAllByProvince(Category category) {
+    public Iterable<Blog> findAllByCategory(Category category) {
         return blogRepository.findAllByCategory(category);
     }
 
@@ -40,4 +40,10 @@ public class BlogServiceImplWithSpringData implements BlogService {
     public Page<Blog> findAllByTittleContaining(String tittle, Pageable pageable) {
         return blogRepository.findAllByTittleContaining(tittle, pageable);
     }
+
+    @Override
+    public Page<Blog> findAllByCategory_Id(Long id, Pageable pageable) {
+        return blogRepository.findAllByCategory_Id(id,pageable);
+    }
+
 }

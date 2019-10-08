@@ -7,7 +7,7 @@
 <body>
 <h1>Create blog</h1>
 <p>
-    <a href="/blogs">Customer list</a>
+    <a href="/blogs">Blog list</a>
 </p>
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
@@ -15,23 +15,24 @@
 <form th:action="@{/create-blog}" th:object="${blog}" method="post">
     <table>
         <tr>
-            <td>First name:</td>
-            <td><input type="text" th:field="*{firstName}"/></td>
+            <th>Title:</th>
         </tr>
         <tr>
-            <td>Last name:</td>
-            <td><input type="text" th:field="*{lastName}"/></td>
+            <td><input type="text" th:field="*{tittle}"/></td>
         </tr>
         <tr>
-            <td>Province:</td>
-            <td>
-                <select th:field="*{category}">
-                    <option th:each="p : ${provinces}" th:value="${p.id}" th:text="${p.name}"></option>
-                </select>
-            </td>
+            <th>Content:</th>
         </tr>
         <tr>
-            <td></td>
+            <td><textarea type="text" th:field="*{content}"></textarea></td>
+        </tr>
+        <td>Category:</td>
+        <td>
+            <select th:field="*{category}">
+                <option th:each="p : ${categories}" th:value="${p.id}" th:text="${p.name}"></option>
+            </select>
+        </td>
+        <tr>
             <td><input type="submit" value="Create blog"></td>
         </tr>
     </table>

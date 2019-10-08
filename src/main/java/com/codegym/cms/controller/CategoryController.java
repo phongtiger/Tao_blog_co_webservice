@@ -20,51 +20,51 @@ public class CategoryController {
     @Autowired
     private BlogService blogService;
 
-    @GetMapping("/view-province/{id}")
+    @GetMapping("/view-category/{id}")
     public ModelAndView viewProvince(@PathVariable("id") Long id){
         Category category = categoryService.findById(id);
         if(category == null){
             return new ModelAndView("/error.404");
         }
 
-        Iterable<Blog> customers = blogService.findAllByProvince(category);
+        Iterable<Blog> blogs = blogService.findAllByCategory(category);
 
-        ModelAndView modelAndView = new ModelAndView("/province/view");
-        modelAndView.addObject("province", category);
-        modelAndView.addObject("customers", customers);
+        ModelAndView modelAndView = new ModelAndView("/category/view");
+        modelAndView.addObject("category", category);
+        modelAndView.addObject("blogs", blogs);
         return modelAndView;
     }
-    @GetMapping("/provinces")
+    @GetMapping("/categories")
     public ModelAndView listProvinces(){
-        Iterable<Category> provinces = categoryService.findAll();
-        ModelAndView modelAndView = new ModelAndView("/province/list");
-        modelAndView.addObject("provinces", provinces);
+        Iterable<Category> categories = categoryService.findAll();
+        ModelAndView modelAndView = new ModelAndView("/category/list");
+        modelAndView.addObject("categories", categories);
         return modelAndView;
     }
 
-    @GetMapping("/create-province")
+    @GetMapping("/create-category")
     public ModelAndView showCreateForm(){
-        ModelAndView modelAndView = new ModelAndView("/province/create");
-        modelAndView.addObject("province", new Category());
+        ModelAndView modelAndView = new ModelAndView("/category/create");
+        modelAndView.addObject("category", new Category());
         return modelAndView;
     }
 
-    @PostMapping("/create-province")
-    public ModelAndView saveProvince(@ModelAttribute("province") Category category){
+    @PostMapping("/create-category")
+    public ModelAndView saveCategory(@ModelAttribute("category") Category category){
         categoryService.save(category);
 
-        ModelAndView modelAndView = new ModelAndView("/province/create");
-        modelAndView.addObject("province", new Category());
+        ModelAndView modelAndView = new ModelAndView("/category/create");
+        modelAndView.addObject("category", new Category());
         modelAndView.addObject("message", "New category created successfully");
         return modelAndView;
     }
 
-    @GetMapping("/edit-province/{id}")
+    @GetMapping("/edit-category/{id}")
     public ModelAndView showEditForm(@PathVariable Long id){
         Category category = categoryService.findById(id);
         if(category != null) {
-            ModelAndView modelAndView = new ModelAndView("/province/edit");
-            modelAndView.addObject("province", category);
+            ModelAndView modelAndView = new ModelAndView("/category/edit");
+            modelAndView.addObject("category", category);
             return modelAndView;
 
         }else {
@@ -73,21 +73,21 @@ public class CategoryController {
         }
     }
 
-    @PostMapping("/edit-province")
-    public ModelAndView updateProvince(@ModelAttribute("province") Category category){
+    @PostMapping("/edit-category")
+    public ModelAndView updateProvince(@ModelAttribute("category") Category category){
         categoryService.save(category);
-        ModelAndView modelAndView = new ModelAndView("/province/edit");
-        modelAndView.addObject("province", category);
+        ModelAndView modelAndView = new ModelAndView("/category/edit");
+        modelAndView.addObject("category", category);
         modelAndView.addObject("message", "Category updated successfully");
         return modelAndView;
     }
 
-    @GetMapping("/delete-province/{id}")
+    @GetMapping("/delete-category/{id}")
     public ModelAndView showDeleteForm(@PathVariable Long id){
         Category category = categoryService.findById(id);
         if(category != null) {
-            ModelAndView modelAndView = new ModelAndView("/province/delete");
-            modelAndView.addObject("province", category);
+            ModelAndView modelAndView = new ModelAndView("/category/delete");
+            modelAndView.addObject("category", category);
             return modelAndView;
 
         }else {
@@ -96,10 +96,10 @@ public class CategoryController {
         }
     }
 
-    @PostMapping("/delete-province")
-    public String deleteProvince(@ModelAttribute("province") Category category){
+    @PostMapping("/delete-category")
+    public String deleteProvince(@ModelAttribute("category") Category category){
         categoryService.remove(category.getId());
-        return "redirect:provinces";
+        return "redirect:categories";
     }
 
 }

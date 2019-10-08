@@ -25,6 +25,20 @@ public class BlogController {
         return categoryService.findAll();
     }
 
+    @PostMapping("/search-category")
+    public ModelAndView listBlogByCategory(@ModelAttribute ("blog" ) Blog blog , Pageable pageable) {
+        System.out.println(blog.getCategory().getId());
+        Page<Blog> blogs;
+        if(blog.getCategory().getId()!=null){
+            blogs = blogService.findAllByCategory_Id(blog.getCategory().getId(), pageable);
+        } else {
+            blogs = blogService.findAll(pageable);
+        }
+        ModelAndView modelAndView = new ModelAndView("/blog/list");
+        modelAndView.addObject("blogs", blogs);
+        return modelAndView;
+    }
+
     @GetMapping("/blogs")
     public ModelAndView listBlogs(@RequestParam("s") Optional<String> s, Pageable pageable){
         Page<Blog> blogs;
@@ -35,6 +49,7 @@ public class BlogController {
         }
         ModelAndView modelAndView = new ModelAndView("/blog/list");
         modelAndView.addObject("blogs", blogs);
+        modelAndView.addObject("blog", new Blog());
         return modelAndView;
     }
     @GetMapping("/create-blog")
@@ -93,5 +108,6 @@ public class BlogController {
         blogService.remove(blog.getId());
         return "redirect:blogs";
     }
+
 
 }
