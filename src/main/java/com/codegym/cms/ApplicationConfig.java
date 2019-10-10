@@ -4,7 +4,7 @@ import com.codegym.cms.formatter.ProvinceFormatter;
 import com.codegym.cms.service.BlogService;
 import com.codegym.cms.service.CategoryService;
 import com.codegym.cms.service.impl.BlogServiceImplWithSpringData;
-import com.codegym.cms.service.impl.CategoryServiceImplWithSpringDate;
+import com.codegym.cms.service.impl.CategoryServiceImplWithSpringData;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -60,7 +60,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         return new BlogServiceImplWithSpringData();
     }
     @Bean
-    public CategoryService provinceService() {return  new CategoryServiceImplWithSpringDate();}
+    public CategoryService provinceService() {return  new CategoryServiceImplWithSpringData();}
 
 
     //Thymeleaf Configuration

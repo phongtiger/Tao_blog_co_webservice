@@ -1,10 +1,15 @@
 package com.codegym.cms.model;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name ="Category2")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+@JsonIgnoreProperties("blogs")
 public class Category {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -12,7 +17,8 @@ public class Category {
 
     private String name;
 
-    @OneToMany(targetEntity = Blog.class)
+    @OneToMany(targetEntity = Blog.class, fetch = FetchType.EAGER, mappedBy = "category")
+//    @JsonBackReference("category-blog")
     private List<Blog> blogs;
 
     public Category() {

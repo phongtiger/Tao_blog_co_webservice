@@ -5,9 +5,17 @@ import com.codegym.cms.repository.CategoryRepository;
 import com.codegym.cms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CategoryServiceImplWithSpringDate implements CategoryService {
+import java.util.List;
+
+public class CategoryServiceImplWithSpringData implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Override
+    public List<Category> findAllRest() {
+        return (List<Category>) categoryRepository.findAll();
+    }
+
     @Override
     public Iterable<Category> findAll() {
         return categoryRepository.findAll();

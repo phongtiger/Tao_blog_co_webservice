@@ -1,9 +1,15 @@
 package com.codegym.cms.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "blogs2")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Blog {
 
     @Id
@@ -12,7 +18,8 @@ public class Blog {
     private String tittle;
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+//    @JsonBackReference("category-blog")
     @JoinColumn(name = "category_id")
     private Category category;
 
